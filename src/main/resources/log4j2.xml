@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Routing name="MyRoutingAppender">
+
+            <Routes pattern="$${ctx:scan}">
+                <Route>
+                    <File
+                            fileName="logs/${ctx:scan}/log.txt"
+                            name="appender-${ctx:scan}">
+                        <PatternLayout>
+                            <Pattern>[%date{ISO8601}][%-5level][%t] %m%n</Pattern>
+                        </PatternLayout>
+                    </File>
+                </Route>
+
+            </Routes>
+
+        </Routing>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%date{ISO8601}][%-5level][%t] %m%n" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="Scan" level="TRACE" additivity="false">
+            <AppenderRef ref="MyRoutingAppender" />
+        </Logger>
+        <Root level="WARN">
+            <AppenderRef ref="STDOUT" />
+            <!--<AppenderRef ref="MyRoutingAppender" />-->
+        </Root>
+    </Loggers>
+</Configuration>
