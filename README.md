@@ -1,2 +1,2 @@
-# directoryScaner
+# directoryScanner
 example test task
